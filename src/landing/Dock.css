@@ -1,0 +1,73 @@
+.dock {
+  position: fixed;
+  left: 20px;
+  bottom: 16px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.dock-group {
+  display: flex;
+  align-items: center;
+}
+
+.dock-theme {
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--raised);
+}
+
+.dock-theme button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.dock-theme button[aria-checked="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.dock-accent {
+  gap: 4px;
+}
+
+.dock-accent button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.dock-accent button[aria-checked="true"] {
+  color: var(--ink);
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.swatch[data-accent="copper"] { background: #c4622d; }
+.swatch[data-accent="indigo"] { background: #243b67; }
+.swatch[data-accent="green"] { background: #2f6b4f; }
+
+.dock-accent button[aria-checked="true"] .swatch {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
+}
+
+.dock-copy {
+  margin: 2px 0 0 2px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}

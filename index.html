@@ -3,7 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>Tathyakosh</title>
+    <script>
+      (function () {
+        var themes = { system: 1, light: 1, dark: 1 }
+        var accents = { copper: 1, indigo: 1, green: 1 }
+        var theme = 'system'
+        var accent = 'copper'
+        try {
+          var storedTheme = localStorage.getItem('kosh.theme')
+          var storedAccent = localStorage.getItem('kosh.accent')
+          if (themes[storedTheme]) theme = storedTheme
+          if (accents[storedAccent]) accent = storedAccent
+        } catch (e) {}
+        var dark = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+        document.documentElement.dataset.accent = accent
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

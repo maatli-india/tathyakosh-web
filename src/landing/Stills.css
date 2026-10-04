@@ -1,0 +1,96 @@
+.stills {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 320px));
+  justify-content: center;
+  align-content: center;
+  gap: 48px;
+  padding: 88px 48px 150px;
+}
+
+.stills figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.stills svg {
+  width: min(100%, 320px);
+  height: auto;
+  overflow: visible;
+}
+
+.stills figcaption {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.still-panel,
+.still-shelf,
+.still-file {
+  fill: var(--raised);
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.still-kosh {
+  fill: var(--raised);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.still-file {
+  stroke: var(--ink);
+}
+
+.still-fold,
+.still-line,
+.still-bracket {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.still-line { stroke: var(--line); }
+
+.still-dot { fill: var(--ink-soft); }
+
+.still-route {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+}
+
+.still-link,
+.still-stamp { fill: var(--accent); }
+
+.still-hole { fill: var(--paper); }
+
+.still-check {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.still-word {
+  fill: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.still-name {
+  fill: var(--ink-soft);
+  font-size: 12px;
+  font-family: inherit;
+}
