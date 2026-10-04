@@ -1,5 +1,5 @@
 import Dock from './Dock'
-import SignIn from './SignIn'
+import Login from './Login'
 import Stage from './Stage'
 import Stills from './Stills'
 import './Landing.css'
@@ -7,14 +7,16 @@ import './Landing.css'
 export default function Landing() {
   return (
     <div className="landing">
-      <header className="top">
-        <h1>Tathyakosh</h1>
-        <SignIn />
-      </header>
-      <main>
-        <Stage />
-        <Stills />
-      </main>
+      <div className="split">
+        <section className="story">
+          <div className="story-top">
+            <h1>Tathyakosh</h1>
+            <Stage />
+          </div>
+          <Stills />
+        </section>
+        <Login />
+      </div>
       <Dock />
     </div>
   )

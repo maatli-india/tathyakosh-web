@@ -5,26 +5,31 @@ const STORY = 'A product asks Kosh for an upload link. The file goes to storage.
 const FILE_PATH = 'M 180 270 C 340 18, 700 18, 800 248'
 
 export default function Stage() {
+  const stageRef = useRef(null)
   const fitRef = useRef(null)
   const [scale, setScale] = useState(1)
 
   useLayoutEffect(() => {
-    const node = fitRef.current
-    if (!node) return undefined
+    const stage = stageRef.current
+    const fit = fitRef.current
+    if (!stage || !fit) return undefined
     const apply = () => {
-      const width = node.clientWidth
-      if (width <= 0) return
+      const maxWidth = stage.clientWidth
+      const maxHeight = stage.clientHeight
+      if (maxWidth <= 0 || maxHeight <= 0) return
+      const width = Math.min(maxWidth, maxHeight * (1000 / 440))
+      fit.style.width = `${width}px`
       const next = width / 1000
       setScale((prev) => (Math.abs(prev - next) < 0.001 ? prev : next))
     }
     apply()
     const observer = new ResizeObserver(apply)
-    observer.observe(node)
+    observer.observe(stage)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <section className="stage" aria-label={STORY}>
+    <section className="stage" aria-label={STORY} ref={stageRef}>
       <div className="stage-fit" ref={fitRef}>
         <div className="stage-canvas" style={{ transform: `scale(${scale})` }} aria-hidden="true">
           <svg className="stage-route" viewBox="0 0 1000 440" width="1000" height="440">
@@ -64,11 +69,6 @@ export default function Stage() {
           <div className="link link-down"><span /></div>
         </div>
       </div>
-      <p className="beat" aria-hidden="true">
-        <span className="beat-ask">Ask</span>
-        <span className="beat-ready">Ready</span>
-        <span className="beat-tell">Tell</span>
-      </p>
     </section>
   )
 }

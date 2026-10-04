@@ -1,20 +1,25 @@
 import './Stills.css'
 
+const STILLS = [
+  { name: 'Ask', Still: AskStill },
+  { name: 'Ready', Still: ReadyStill },
+  { name: 'Tell', Still: TellStill },
+]
+
 export default function Stills() {
+  const cards = [...STILLS, ...STILLS]
   return (
-    <section className="stills" aria-label="Ask, ready, tell">
-      <figure>
-        <AskStill />
-        <figcaption>Ask</figcaption>
-      </figure>
-      <figure>
-        <ReadyStill />
-        <figcaption>Ready</figcaption>
-      </figure>
-      <figure>
-        <TellStill />
-        <figcaption>Tell</figcaption>
-      </figure>
+    <section className="reel" aria-label="Ask, ready, tell">
+      <div className="reel-window">
+        <div className="reel-track">
+          {cards.map((card, index) => (
+            <figure key={`${card.name}-${index}`} aria-hidden={index >= STILLS.length ? true : undefined}>
+              <card.Still />
+              <figcaption>{card.name}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
     </section>
   )
 }

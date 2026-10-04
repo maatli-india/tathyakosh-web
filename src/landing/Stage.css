@@ -1,14 +1,12 @@
 .stage {
-  min-height: calc(100vh - var(--header));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 48px 12px;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 0 8px;
 }
 
 .stage-fit {
-  width: min(1000px, 100%);
-  margin: 0 auto;
   aspect-ratio: 1000 / 440;
   position: relative;
   overflow: hidden;
@@ -265,28 +263,6 @@
   stroke-linejoin: round;
 }
 
-.beat {
-  position: relative;
-  height: 1.25rem;
-  margin: 18px 0 0;
-  text-align: center;
-}
-
-.beat span {
-  position: absolute;
-  left: 0;
-  right: 0;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  opacity: 0;
-}
-
-.beat-ask { animation: beat-ask 16s linear infinite; }
-.beat-ready { animation: beat-ready 16s linear infinite; }
-.beat-tell { animation: beat-tell 16s linear infinite; }
-
 @keyframes route-show {
   0%, 24% { opacity: 0; }
   28%, 50% { opacity: 0.85; }
@@ -348,31 +324,13 @@
   98%, 100% { opacity: 0; transform: translateX(-64px); }
 }
 
-@keyframes beat-ask {
-  0%, 48% { opacity: 1; }
-  52%, 100% { opacity: 0; }
-}
-
-@keyframes beat-ready {
-  0%, 48% { opacity: 0; }
-  52%, 64% { opacity: 1; }
-  68%, 100% { opacity: 0; }
-}
-
-@keyframes beat-tell {
-  0%, 64% { opacity: 0; }
-  68%, 94% { opacity: 1; }
-  98%, 100% { opacity: 0; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .file,
   .worker,
   .stamp,
   .pulse,
   .link,
-  .stage-route path,
-  .beat span {
+  .stage-route path {
     animation: none;
   }
 
@@ -382,17 +340,14 @@
   }
 
   .worker,
-  .stamp,
-  .beat-ready {
+  .stamp {
     opacity: 1;
     transform: none;
   }
 
   .pulse,
   .link,
-  .stage-route path,
-  .beat-ask,
-  .beat-tell {
+  .stage-route path {
     opacity: 0;
   }
 }
