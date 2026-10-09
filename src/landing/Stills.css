@@ -1,0 +1,136 @@
+.reel {
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px 148px;
+}
+
+.reel-window {
+  width: 568px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.reel-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+}
+
+.reel-track.is-sliding {
+  transform: translateX(-196px);
+  transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reel-track figure {
+  flex: 0 0 176px;
+  width: 176px;
+  margin: 0;
+  padding: 10px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--raised);
+}
+
+.reel-track svg {
+  width: 128px;
+  height: 72px;
+}
+
+.reel-track figcaption {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.reel-track strong {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.reel-track figcaption span {
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-track.is-sliding {
+    transform: none;
+    transition: none;
+  }
+}
+
+.still-panel,
+.still-shelf,
+.still-file {
+  fill: var(--raised);
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.still-kosh {
+  fill: var(--raised);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.still-file {
+  stroke: var(--ink);
+}
+
+.still-fold,
+.still-line,
+.still-bracket {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.still-line { stroke: var(--line); }
+
+.still-dot { fill: var(--ink-soft); }
+
+.still-route {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+}
+
+.still-link,
+.still-stamp { fill: var(--accent); }
+
+.still-hole { fill: var(--paper); }
+
+.still-check {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.still-word {
+  fill: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.still-name {
+  fill: var(--ink-soft);
+  font-size: 12px;
+  font-family: inherit;
+}

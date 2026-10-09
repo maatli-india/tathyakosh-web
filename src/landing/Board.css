@@ -1,0 +1,246 @@
+.pcb-stage {
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 0 8px;
+}
+
+.pcb-fit {
+  aspect-ratio: 1000 / 560;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.pcb-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1000px;
+  height: 560px;
+  transform-origin: 0 0;
+}
+
+.pcb-art {
+  position: absolute;
+  inset: 0;
+}
+
+.pcb-mask {
+  fill: #121614;
+}
+
+.pcb-wire,
+.pcb-route,
+.pcb-node {
+  fill: none;
+  stroke: #cbb892;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pcb-node {
+  fill: #cbb892;
+  stroke: none;
+}
+
+.pcb-flow,
+.pcb-ask-flow {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+.pcb-flow { animation: pcb-flow 16s linear infinite; }
+.pcb-ask-flow { animation: pcb-ask-flow 16s linear infinite; }
+
+.pcb-legs rect { fill: #cbb892; }
+
+.pcb-cap { fill: #d2c09a; }
+.pcb-cap-end { fill: #f4efe4; }
+
+.pcb-die rect:not(:first-child) {
+  fill: var(--accent);
+  opacity: 0.55;
+  animation: pcb-wake 16s linear infinite;
+}
+
+.pcb-die rect:nth-child(3) { animation-delay: 0.12s; }
+.pcb-die rect:nth-child(4) { animation-delay: 0.24s; }
+.pcb-die rect:nth-child(5) { animation-delay: 0.36s; }
+.pcb-die rect:nth-child(6) { animation-delay: 0.48s; }
+.pcb-die rect:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes pcb-ask-flow {
+  0%, 2% { stroke-dashoffset: 100; opacity: 0; }
+  6% { opacity: 1; stroke-dashoffset: 100; }
+  16% { stroke-dashoffset: 0; opacity: 1; }
+  22%, 100% { stroke-dashoffset: 0; opacity: 0.35; }
+}
+
+@keyframes pcb-flow {
+  0%, 20% { stroke-dashoffset: 100; opacity: 0; }
+  24% { opacity: 1; stroke-dashoffset: 100; }
+  58%, 88% { stroke-dashoffset: 0; opacity: 1; }
+  96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes pcb-wake {
+  0%, 16% { opacity: 0.4; }
+  22%, 34% { opacity: 1; }
+  46%, 100% { opacity: 0.7; }
+}
+
+.pcb-die rect:first-child {
+  fill: #1c140c;
+}
+
+.pcb-die rect:not(:first-child) {
+  fill: var(--accent);
+  opacity: 0.92;
+}
+
+.pcb-pack {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 14px;
+  background: #1a1c1b;
+  color: #f4efe6;
+  border: 1px solid #3a342c;
+}
+
+.pcb-pack strong {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.pcb-product {
+  left: 70px;
+  top: 210px;
+  width: 200px;
+  height: 150px;
+}
+
+.pcb-kosh {
+  left: 385px;
+  top: 145px;
+  width: 240px;
+  height: 260px;
+  background: transparent;
+  border: none;
+  align-items: flex-end;
+  padding-bottom: 18px;
+}
+
+.pcb-storage {
+  left: 760px;
+  top: 210px;
+  width: 190px;
+  height: 150px;
+}
+
+.pcb-ask,
+.pcb-signal,
+.pcb-tick {
+  position: absolute;
+}
+
+.pcb-ask {
+  left: 270px;
+  top: 285px;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  animation: pcb-ask 16s linear infinite;
+}
+
+.pcb-signal {
+  left: 0;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  offset-path: path("M 170 360 V 470 H 850 V 360");
+  offset-rotate: 0deg;
+  offset-anchor: center;
+  opacity: 0;
+  animation: pcb-signal 16s linear infinite;
+}
+
+.pcb-tick {
+  left: 918px;
+  top: 198px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #121614;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  animation: pcb-tick 16s linear infinite;
+}
+
+.pcb-tick svg {
+  width: 12px;
+  height: 12px;
+}
+
+.pcb-tick path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes pcb-ask {
+  0% { opacity: 0; transform: translateX(0); }
+  4% { opacity: 1; }
+  16% { opacity: 1; transform: translateX(100px); }
+  20%, 100% { opacity: 0; transform: translateX(100px); }
+}
+
+@keyframes pcb-signal {
+  0%, 18% { offset-distance: 0%; opacity: 0; }
+  22% { offset-distance: 0%; opacity: 1; }
+  58%, 88% { offset-distance: 100%; opacity: 1; }
+  96%, 100% { offset-distance: 100%; opacity: 0; }
+}
+
+@keyframes pcb-tick {
+  0%, 56% { opacity: 0; transform: scale(0.6); }
+  62%, 88% { opacity: 1; transform: scale(1); }
+  96%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcb-ask,
+  .pcb-signal,
+  .pcb-tick {
+    animation: none;
+  }
+
+  .pcb-signal {
+    offset-distance: 100%;
+    opacity: 1;
+  }
+
+  .pcb-tick {
+    opacity: 1;
+    transform: none;
+  }
+}

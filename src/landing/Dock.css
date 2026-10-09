@@ -1,0 +1,134 @@
+.dock {
+  position: fixed;
+  left: 16px;
+  bottom: 14px;
+  z-index: 30;
+}
+
+.dock-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--raised);
+  color: var(--ink);
+}
+
+.dock-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.dock-icon circle,
+.dock-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.dock-panel {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  width: 280px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--raised);
+  box-shadow: var(--shadow);
+}
+
+.dock:hover .dock-panel,
+.dock:focus-within .dock-panel {
+  display: block;
+}
+
+.dock-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 10px;
+  padding: 3px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ink) 6%, var(--paper));
+}
+
+.dock-tabs button {
+  height: 28px;
+  border-radius: 7px;
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.dock-tabs button[aria-selected="true"] {
+  background: var(--raised);
+  color: var(--ink);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.dock-group {
+  display: flex;
+  width: 100%;
+}
+
+.dock-theme {
+  width: 100%;
+  gap: 8px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.dock-theme button {
+  flex: 1;
+  padding: 6px 0;
+  border-radius: 6px;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.dock-theme button[aria-checked="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.dock-accent {
+  gap: 6px;
+  padding: 8px;
+  border-radius: 10px;
+  background: #1c1b18;
+}
+
+.dock-accent button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 999px;
+  color: #cfc8bc;
+  font-size: 13px;
+}
+
+.dock-accent button[aria-checked="true"] {
+  color: #fff;
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+.swatch[data-accent="copper"] { background: #e08955; }
+.swatch[data-accent="indigo"] { background: #8aa4d6; }
+.swatch[data-accent="green"] { background: #7dba9e; }
+
+.dock-accent button[aria-checked="true"] .swatch {
+  box-shadow: 0 0 0 2px #1c1b18, 0 0 0 4px #f4f0e8;
+}
