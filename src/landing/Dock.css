@@ -1,29 +1,92 @@
 .dock {
   position: fixed;
-  left: 20px;
-  bottom: 16px;
+  left: 16px;
+  bottom: 14px;
   z-index: 30;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+}
+
+.dock-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--raised);
+  color: var(--ink);
+}
+
+.dock-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.dock-icon circle,
+.dock-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.dock-panel {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  width: 280px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--raised);
+  box-shadow: var(--shadow);
+}
+
+.dock:hover .dock-panel,
+.dock:focus-within .dock-panel {
+  display: block;
+}
+
+.dock-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 10px;
+  padding: 3px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ink) 6%, var(--paper));
+}
+
+.dock-tabs button {
+  height: 28px;
+  border-radius: 7px;
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.dock-tabs button[aria-selected="true"] {
+  background: var(--raised);
+  color: var(--ink);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 12%, transparent);
 }
 
 .dock-group {
   display: flex;
-  align-items: center;
+  width: 100%;
 }
 
 .dock-theme {
-  gap: 2px;
+  width: 100%;
+  gap: 8px;
   padding: 3px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--raised);
+  background: var(--paper);
 }
 
 .dock-theme button {
-  padding: 6px 10px;
+  flex: 1;
+  padding: 6px 0;
   border-radius: 6px;
   color: var(--ink-soft);
   font-size: 13px;
@@ -35,7 +98,10 @@
 }
 
 .dock-accent {
-  gap: 4px;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 10px;
+  background: #1c1b18;
 }
 
 .dock-accent button {
@@ -44,30 +110,25 @@
   gap: 6px;
   padding: 4px 8px 4px 4px;
   border-radius: 999px;
-  color: var(--ink-soft);
+  color: #cfc8bc;
   font-size: 13px;
 }
 
 .dock-accent button[aria-checked="true"] {
-  color: var(--ink);
+  color: #fff;
 }
 
 .swatch {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
 }
 
-.swatch[data-accent="copper"] { background: #c4622d; }
-.swatch[data-accent="indigo"] { background: #243b67; }
-.swatch[data-accent="green"] { background: #2f6b4f; }
+.swatch[data-accent="copper"] { background: #e08955; }
+.swatch[data-accent="indigo"] { background: #8aa4d6; }
+.swatch[data-accent="green"] { background: #7dba9e; }
 
 .dock-accent button[aria-checked="true"] .swatch {
-  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
-}
-
-.dock-copy {
-  margin: 2px 0 0 2px;
-  font-size: 12px;
-  color: var(--ink-soft);
+  box-shadow: 0 0 0 2px #1c1b18, 0 0 0 4px #f4f0e8;
 }

@@ -1,14 +1,25 @@
 .login {
-  min-width: 0;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  padding: 32px;
+  position: absolute;
+  top: 50%;
+  right: 36px;
+  z-index: 2;
+  width: 280px;
+  padding: 22px 20px 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--paper);
+  transform: translateY(-50%);
+  transition: width 320ms ease, padding 320ms ease, transform 320ms ease, box-shadow 320ms ease;
 }
 
-.login-form,
-.login-status {
-  width: min(100%, 360px);
+.login.is-raised,
+.login:focus-within {
+  z-index: 40;
+  width: 380px;
+  padding: 34px 28px 30px;
+  background: var(--raised);
+  box-shadow: 0 28px 70px color-mix(in srgb, var(--ink) 24%, transparent);
+  transform: translateY(-54%);
 }
 
 .login-form {
@@ -17,46 +28,63 @@
 }
 
 .login-form h2 {
-  margin: 0 0 22px;
-  font-size: 1.25rem;
+  margin: 0 0 18px;
+  font-size: 1.45rem;
   font-weight: 600;
   letter-spacing: -0.04em;
 }
 
 .login-form label {
   margin-bottom: 6px;
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--ink-soft);
 }
 
 .login-form input {
-  height: 44px;
-  margin-bottom: 16px;
+  height: 42px;
+  margin-bottom: 14px;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 2px;
+  border-radius: 10px;
   background: var(--paper);
   color: var(--ink);
 }
 
-.login-form button {
-  height: 44px;
-  margin-top: 4px;
-  border-radius: 2px;
-  background: var(--ink);
-  color: var(--paper);
+.login.is-raised .login-form input {
+  background: color-mix(in srgb, var(--paper) 86%, var(--raised));
 }
 
-.login-hint,
-.login-status {
-  margin: 12px 0 0;
+.login-form button {
+  height: 42px;
+  margin-top: 4px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.login-hint {
+  margin: 10px 0 0;
+  font-size: 13px;
   color: var(--ink-soft);
 }
 
 .login-status {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.45rem;
   font-weight: 600;
   letter-spacing: -0.04em;
-  color: var(--ink);
+  line-height: 1.15;
+}
+
+.login-status::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 3px;
+  margin-bottom: 14px;
+  border-radius: 2px;
+  background: var(--accent);
 }

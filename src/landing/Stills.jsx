@@ -1,21 +1,64 @@
+import { useEffect, useState } from 'react'
 import './Stills.css'
 
 const STILLS = [
-  { name: 'Ask', Still: AskStill },
-  { name: 'Ready', Still: ReadyStill },
-  { name: 'Tell', Still: TellStill },
+  { name: 'Ask', line: 'Product asks Kosh for an upload link. The file takes a road Kosh does not walk.', Still: AskStill },
+  { name: 'Ready', line: 'The file is marked ready.', Still: ReadyStill },
+  { name: 'Tell', line: 'Kosh tells the product the file is ready. The product asks for a download link.', Still: TellStill },
 ]
 
+const SHIFT_AT = [0.48, 0.64, 0.94]
+const LOOP_MS = 16000
+const SLIDE_MS = 700
+
 export default function Stills() {
-  const cards = [...STILLS, ...STILLS]
+  const [order, setOrder] = useState(STILLS)
+  const [sliding, setSliding] = useState(false)
+
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) return undefined
+    const start = performance.now()
+    const fired = [false, false, false]
+    let frame = 0
+    let timer = 0
+
+    const tick = (now) => {
+      const progress = ((now - start) % LOOP_MS) / LOOP_MS
+      if (progress < 0.04) fired.fill(false)
+      SHIFT_AT.forEach((mark, index) => {
+        if (fired[index] || progress < mark) return
+        fired[index] = true
+        setSliding(true)
+        window.clearTimeout(timer)
+        timer = window.setTimeout(() => {
+          setOrder((current) => [...current.slice(1), current[0]])
+          setSliding(false)
+        }, SLIDE_MS)
+      })
+      frame = requestAnimationFrame(tick)
+    }
+
+    frame = requestAnimationFrame(tick)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.clearTimeout(timer)
+    }
+  }, [])
+
+  const shown = sliding ? [...order, order[0]] : order
+
   return (
     <section className="reel" aria-label="Ask, ready, tell">
       <div className="reel-window">
-        <div className="reel-track">
-          {cards.map((card, index) => (
-            <figure key={`${card.name}-${index}`} aria-hidden={index >= STILLS.length ? true : undefined}>
+        <div className={sliding ? 'reel-track is-sliding' : 'reel-track'}>
+          {shown.map((card, index) => (
+            <figure key={`${card.name}-${index}`} aria-hidden={index > 2 ? true : undefined}>
               <card.Still />
-              <figcaption>{card.name}</figcaption>
+              <figcaption>
+                <strong>{card.name}</strong>
+                <span>{card.line}</span>
+              </figcaption>
             </figure>
           ))}
         </div>

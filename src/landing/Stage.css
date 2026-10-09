@@ -7,9 +7,15 @@
 }
 
 .stage-fit {
-  aspect-ratio: 1000 / 440;
+  aspect-ratio: 1000 / 560;
   position: relative;
   overflow: hidden;
+  border-radius: 22px;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center;
 }
 
 .stage-canvas {
@@ -17,7 +23,7 @@
   left: 0;
   top: 0;
   width: 1000px;
-  height: 440px;
+  height: 560px;
   transform-origin: 0 0;
 }
 
@@ -34,18 +40,19 @@
 }
 
 .product {
-  left: 64px;
-  top: 200px;
-  width: 240px;
-  height: 156px;
+  left: 24px;
+  top: 248px;
+  width: 260px;
+  height: 230px;
   border: 1.5px solid var(--line);
-  border-radius: 12px;
+  border-radius: 18px;
   background: var(--raised);
   overflow: hidden;
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--ink) 8%, transparent);
 }
 
 .product-bar {
-  height: 28px;
+  height: 36px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -54,55 +61,62 @@
 }
 
 .product-bar i {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--ink-soft);
   display: block;
 }
 
 .kosh {
-  left: 400px;
-  top: 176px;
-  width: 180px;
-  height: 180px;
+  left: 380px;
+  top: 228px;
+  width: 250px;
+  height: 250px;
   display: grid;
   place-items: center;
   border: 1.5px solid var(--ink);
-  border-radius: 12px;
+  border-radius: 18px;
   background: var(--raised);
-  font-size: 28px;
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--ink) 10%, transparent);
+  font-size: 42px;
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .storage {
-  left: 710px;
-  top: 254px;
-  width: 210px;
+  left: 700px;
+  top: 342px;
+  width: 270px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .storage i {
   display: block;
-  height: 26px;
+  height: 36px;
   border: 1.5px solid var(--line);
   border-radius: 4px;
   background: var(--raised);
 }
 
 .actor-name {
-  top: 376px;
+  top: 512px;
   margin: 0;
   text-align: center;
-  font-size: 14px;
-  color: var(--ink-soft);
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
 }
 
-.actor-product { left: 64px; width: 240px; }
-.actor-storage { left: 710px; width: 210px; }
+:root[data-theme="dark"] .kosh {
+  color: #f4f0e8;
+}
+
+.actor-product { left: 24px; width: 260px; }
+.actor-storage { left: 700px; width: 270px; }
 
 .stage-route {
   position: absolute;
@@ -113,35 +127,37 @@
 .stage-route path {
   fill: none;
   stroke: var(--accent);
-  stroke-width: 1.5;
-  stroke-dasharray: 5 7;
+  stroke-width: 2.5;
+  stroke-dasharray: 6 8;
+  filter: drop-shadow(0 0 8px var(--accent));
   opacity: 0;
   animation: route-show 16s linear infinite;
 }
 
 .pulse {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 12px var(--accent);
   border-radius: 50%;
   background: var(--accent);
   opacity: 0;
 }
 
 .pulse-ask {
-  left: 312px;
-  top: 262px;
+  left: 292px;
+  top: 348px;
   animation: pulse-ask 16s linear infinite;
 }
 
 .pulse-tell {
-  left: 392px;
-  top: 286px;
+  left: 360px;
+  top: 376px;
   animation: pulse-tell 16s linear infinite;
 }
 
 .pulse-down {
-  left: 312px;
-  top: 304px;
+  left: 292px;
+  top: 404px;
   animation: pulse-down 16s linear infinite;
 }
 
@@ -164,27 +180,28 @@
 }
 
 .link-back {
-  left: 368px;
-  top: 236px;
+  left: 346px;
+  top: 318px;
   animation: link-back 16s linear infinite;
 }
 
 .link-down {
-  left: 368px;
-  top: 236px;
+  left: 346px;
+  top: 318px;
   animation: link-down 16s linear infinite;
 }
 
 .file {
   left: 0;
   top: 0;
-  width: 32px;
-  height: 40px;
-  offset-path: path("M 180 270 C 340 18, 700 18, 800 248");
+  width: 44px;
+  height: 56px;
+  offset-path: path("M 150 330 C 300 28, 720 32, 820 330");
   offset-rotate: 0deg;
   offset-anchor: center;
   opacity: 0;
   z-index: 2;
+  filter: drop-shadow(0 10px 12px color-mix(in srgb, var(--accent) 55%, transparent));
   animation: file-run 16s linear infinite;
 }
 
@@ -205,10 +222,10 @@
 .file-fold { fill: none; }
 
 .worker {
-  left: 776px;
-  top: 214px;
-  width: 52px;
-  height: 64px;
+  left: 786px;
+  top: 292px;
+  width: 68px;
+  height: 84px;
   opacity: 0;
   z-index: 3;
   animation: worker-scan 16s linear infinite;
@@ -236,10 +253,10 @@
 }
 
 .stamp {
-  left: 804px;
-  top: 214px;
-  width: 22px;
-  height: 22px;
+  left: 816px;
+  top: 296px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--accent);
   color: var(--paper);
@@ -272,15 +289,15 @@
 @keyframes pulse-ask {
   0% { opacity: 0; transform: translateX(0); }
   3% { opacity: 1; transform: translateX(0); }
-  12% { opacity: 1; transform: translateX(80px); }
-  16%, 100% { opacity: 0; transform: translateX(80px); }
+  12% { opacity: 1; transform: translateX(70px); }
+  16%, 100% { opacity: 0; transform: translateX(70px); }
 }
 
 @keyframes link-back {
   0%, 13% { opacity: 0; transform: translateX(0); }
   16% { opacity: 1; transform: translateX(0); }
-  26% { opacity: 1; transform: translateX(-64px); }
-  30%, 100% { opacity: 0; transform: translateX(-64px); }
+  26% { opacity: 1; transform: translateX(-56px); }
+  30%, 100% { opacity: 0; transform: translateX(-56px); }
 }
 
 @keyframes file-run {
@@ -306,22 +323,22 @@
 @keyframes pulse-tell {
   0%, 64% { opacity: 0; transform: translateX(0); }
   68% { opacity: 1; transform: translateX(0); }
-  76% { opacity: 1; transform: translateX(-80px); }
-  80%, 100% { opacity: 0; transform: translateX(-80px); }
+  76% { opacity: 1; transform: translateX(-70px); }
+  80%, 100% { opacity: 0; transform: translateX(-70px); }
 }
 
 @keyframes pulse-down {
   0%, 76% { opacity: 0; transform: translateX(0); }
   80% { opacity: 1; transform: translateX(0); }
-  86% { opacity: 1; transform: translateX(80px); }
-  90%, 100% { opacity: 0; transform: translateX(80px); }
+  86% { opacity: 1; transform: translateX(70px); }
+  90%, 100% { opacity: 0; transform: translateX(70px); }
 }
 
 @keyframes link-down {
   0%, 84% { opacity: 0; transform: translateX(0); }
   88% { opacity: 1; transform: translateX(0); }
-  94% { opacity: 1; transform: translateX(-64px); }
-  98%, 100% { opacity: 0; transform: translateX(-64px); }
+  94% { opacity: 1; transform: translateX(-56px); }
+  98%, 100% { opacity: 0; transform: translateX(-56px); }
 }
 
 @media (prefers-reduced-motion: reduce) {

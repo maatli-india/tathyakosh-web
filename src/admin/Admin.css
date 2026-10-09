@@ -1,0 +1,156 @@
+.shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px 18px 22px;
+  border-right: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.mark {
+  margin: 0 0 22px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mark::after {
+  content: "";
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.rail nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rail nav a {
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.rail nav a:hover {
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.rail nav a[aria-current="page"],
+.rail nav a[aria-current="page"]:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.session {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+  color: var(--ink-soft);
+}
+
+.session span {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.session strong {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.leave {
+  padding: 8px 12px;
+  border-radius: 10px;
+  text-align: left;
+  color: var(--ink-soft);
+}
+
+main {
+  min-width: 0;
+  overflow: auto;
+  background:
+    radial-gradient(80% 60% at 12% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 68%);
+}
+
+.page {
+  max-width: 880px;
+  padding: 36px 40px 64px;
+}
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.page-title::after {
+  content: "";
+  width: 42px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.lede {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.back svg {
+  width: 16px;
+  height: 16px;
+}
+
+.back path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

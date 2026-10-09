@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import './Stage.css'
 
 const STORY = 'A product asks Kosh for an upload link. The file goes to storage. The file is marked ready. Kosh tells the product, and the product asks for a download link.'
-const FILE_PATH = 'M 180 270 C 340 18, 700 18, 800 248'
+const FILE_PATH = 'M 150 330 C 300 28, 720 32, 820 330'
 
 export default function Stage() {
   const stageRef = useRef(null)
@@ -17,7 +17,7 @@ export default function Stage() {
       const maxWidth = stage.clientWidth
       const maxHeight = stage.clientHeight
       if (maxWidth <= 0 || maxHeight <= 0) return
-      const width = Math.min(maxWidth, maxHeight * (1000 / 440))
+      const width = Math.min(maxWidth, maxHeight * (1000 / 560))
       fit.style.width = `${width}px`
       const next = width / 1000
       setScale((prev) => (Math.abs(prev - next) < 0.001 ? prev : next))
@@ -32,7 +32,7 @@ export default function Stage() {
     <section className="stage" aria-label={STORY} ref={stageRef}>
       <div className="stage-fit" ref={fitRef}>
         <div className="stage-canvas" style={{ transform: `scale(${scale})` }} aria-hidden="true">
-          <svg className="stage-route" viewBox="0 0 1000 440" width="1000" height="440">
+          <svg className="stage-route" viewBox="0 0 1000 560" width="1000" height="560">
             <path d={FILE_PATH} />
           </svg>
 

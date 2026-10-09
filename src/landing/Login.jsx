@@ -1,13 +1,23 @@
-import { useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import './Login.css'
 
-export default function Login() {
+export default function Login({ onSignIn }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [loggedIn, setLoggedIn] = useState(false)
   const [incomplete, setIncomplete] = useState(false)
+  const [raised, setRaised] = useState(false)
+  const panelRef = useRef(null)
   const usernameId = useId()
   const passwordId = useId()
+
+  useEffect(() => {
+    if (!raised) return undefined
+    function onPointerDown(event) {
+      if (!panelRef.current?.contains(event.target)) setRaised(false)
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => document.removeEventListener('pointerdown', onPointerDown)
+  }, [raised])
 
   function onSubmit(event) {
     event.preventDefault()
@@ -15,20 +25,19 @@ export default function Login() {
       setIncomplete(true)
       return
     }
+    const key = username.trim()
     setPassword('')
-    setLoggedIn(true)
-  }
-
-  if (loggedIn) {
-    return (
-      <section className="login" aria-label="Signed in">
-        <p className="login-status">Admin is logged in</p>
-      </section>
-    )
+    setUsername('')
+    onSignIn(key)
   }
 
   return (
-    <section className="login" aria-label="Sign in">
+    <section
+      ref={panelRef}
+      className={raised ? 'login is-raised' : 'login'}
+      aria-label="Sign in"
+      onPointerDown={() => setRaised(true)}
+    >
       <form className="login-form" autoComplete="off" onSubmit={onSubmit}>
         <h2>Sign in</h2>
         <label htmlFor={usernameId}>Username</label>
