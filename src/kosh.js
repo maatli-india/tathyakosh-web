@@ -1,8 +1,8 @@
-// Shipped UI calls this host. `npm run dev` stays on /kosh and Vite forwards there.
+// Browser calls same-origin /kosh. Vite (local) and Netlify (kosh-dev) forward that to the dev API.
 const API_ORIGIN = 'https://api-dev.kosh.maatli.com'
 
 export async function kosh(path, { adminKey, body, method = 'GET' } = {}) {
-  const url = import.meta.env.DEV ? `/kosh${path}` : `${API_ORIGIN}/kosh${path}`
+  const url = `/kosh${path}`
   const headers = { 'X-Admin-Key': adminKey }
   if (body !== undefined) headers['Content-Type'] = 'application/json'
   let response
@@ -13,9 +13,7 @@ export async function kosh(path, { adminKey, body, method = 'GET' } = {}) {
       method,
     })
   } catch {
-    const error = new Error(import.meta.env.DEV
-      ? `The page could not call the dev API. The UI server on this machine has to be running; it forwards /kosh to ${API_ORIGIN}.`
-      : `Could not reach ${API_ORIGIN}.`)
+    const error = new Error(`Could not reach ${API_ORIGIN}.`)
     error.status = 0
     throw error
   }
