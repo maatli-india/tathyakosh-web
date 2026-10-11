@@ -86,13 +86,26 @@ export default function TenantFiles({ adminKey, id, onUnauthorized }) {
         const showOwner = files.some((file) => file.ownerRef)
         return (
           <section key={type} className="file-group">
-            <button type="button" className="file-group-head" aria-expanded={expanded} onClick={() => toggle(type)}>
-              <span>
-                <span className="mime-label">File type</span>
-                <strong>{type}</strong>
-              </span>
-              <span>{files.length} {files.length === 1 ? 'file' : 'files'}</span>
-            </button>
+            <div className="file-group-head">
+              <button type="button" className="file-group-toggle" aria-expanded={expanded} onClick={() => toggle(type)}>
+                <span className="file-type-name">
+                  <span className="mime-label">File type</span>
+                  <strong>{type.toUpperCase()}</strong>
+                </span>
+                <span className="file-group-meta">
+                  <span>{files.length} {files.length === 1 ? 'file' : 'files'}</span>
+                  <span>{sizeLabel(files.reduce((sum, file) => sum + (Number(file.sizeBytes) || 0), 0))}</span>
+                </span>
+              </button>
+              <button
+                type="button"
+                className="copy-icon"
+                aria-label={`Copy ${type}`}
+                onClick={() => navigator.clipboard.writeText(type.toLowerCase())}
+              >
+                <CopyIcon />
+              </button>
+            </div>
             {expanded ? (
               <table className="file-table">
                 <thead>
@@ -115,7 +128,7 @@ export default function TenantFiles({ adminKey, id, onUnauthorized }) {
                       <td>{formatWhen(file.createdAt)}</td>
                       <td>
                         {file.status === 'READY' ? (
-                          <button type="button" className="btn slim" onClick={() => setView(file)}>View</button>
+                          <button type="button" className="btn slim view" onClick={() => setView(file)}>View</button>
                         ) : null}
                       </td>
                     </tr>
@@ -199,6 +212,15 @@ function previewKind(contentType) {
   if (typeof contentType === 'string' && contentType.startsWith('video/')) return 'video'
   if (contentType === 'application/pdf') return 'pdf'
   return 'other'
+}
+
+function CopyIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <rect x="5" y="5" width="8" height="8" rx="1.2" />
+      <path d="M3 10.5 V3.2 H10.5" />
+    </svg>
+  )
 }
 
 function typeLabel(contentType) {

@@ -53,7 +53,7 @@ export default function Admin({ adminKey, expiresAt, onLeave, route }) {
   return (
     <div className="shell">
       <aside className="rail">
-        <p className="mark">Tathyakosh</p>
+        <p className="mark"><span className="wordmark" role="img" aria-label="Tathyakosh" /></p>
         <nav>
           <a href="/dashboard" aria-current={route.page === 'dashboard' ? 'page' : undefined} onClick={(event) => followLink(event, '/dashboard')}>
             Dashboard

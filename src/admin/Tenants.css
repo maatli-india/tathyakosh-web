@@ -364,21 +364,84 @@ input[readonly] {
   overflow: hidden;
 }
 
+.name-lock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.copy-icon {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  color: var(--ink-soft);
+}
+
+.copy-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.copy-icon rect,
+.copy-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+
+.copy-icon:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
 .file-group-head {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 8px 0;
+}
+
+.file-group-toggle {
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
+  gap: 16px;
+  padding: 6px 8px 6px 14px;
   text-align: left;
 }
 
-.file-group-head strong {
-  display: block;
-  margin-top: 2px;
+.file-type-name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.file-type-name strong {
   font-size: 1rem;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.04em;
+}
+
+.file-group-meta {
+  display: flex;
+  gap: 18px;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.btn.view {
+  background: var(--accent);
+  color: var(--paper);
+  border-color: transparent;
 }
 
 .file-table {

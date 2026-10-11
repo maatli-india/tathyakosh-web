@@ -7,15 +7,12 @@ import { fileTypesFromForm, formFromTenant, formSnapshot, patchBody } from './te
 import TenantFiles from './TenantFiles'
 import { useKosh } from './useKosh'
 
-const ISSUED_KEY = 'kosh.issuedKeys'
-
 export default function Tenant({ adminKey, id, onUnauthorized }) {
   const [tenant, setTenant] = useState(null)
   const [form, setForm] = useState(null)
   const [notice, setNotice] = useState(null)
   const [secret, setSecret] = useState(null)
   const [confirmDelete, setConfirmDelete] = useState(false)
-  const [issued, setIssued] = useState(() => readIssued(id))
   const [missing, setMissing] = useState('')
   const [tab, setTab] = useState('details')
   const [panel, setPanel] = useState('policy')
@@ -61,8 +58,6 @@ export default function Tenant({ adminKey, id, onUnauthorized }) {
   async function onIssue() {
     const created = await run(() => issueAPIKey(adminKey, id))
     if (!created.ok) return
-    rememberIssued(id, created.data)
-    setIssued(readIssued(id))
     setSecret({
       lines: [['API key', created.data.apiKey], ['Key id', created.data.id]],
       note: 'This key is not stored. It cannot be retrieved later. Copy it and keep it somewhere secure.',
@@ -75,8 +70,6 @@ export default function Tenant({ adminKey, id, onUnauthorized }) {
   async function onRevoke(key) {
     const result = await run(() => revokeAPIKey(adminKey, id, key))
     if (!result.ok) return
-    forgetIssued(id, key)
-    setIssued(readIssued(id))
     setSecret((current) => (current?.revokeId === key ? null : current))
     setNotice({ tone: 'ok', text: 'API key revoked' })
   }
@@ -174,16 +167,6 @@ export default function Tenant({ adminKey, id, onUnauthorized }) {
                 <button type="button" className="btn" disabled={busy} onClick={onIssue}>Issue API key</button>
                 <button type="button" className="btn" disabled={busy} onClick={onRotate}>Rotate webhook secret</button>
               </div>
-              {issued.length ? (
-                <ul className="issued">
-                  {issued.map((key) => (
-                    <li key={key.id}>
-                      <code>{key.id}</code>
-                      <button type="button" className="text-btn" onClick={() => onRevoke(key.id)}>Revoke</button>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
             </div>
           ) : null}
         </section>
@@ -228,36 +211,4 @@ function Back() {
 function dirty(tenant, form) {
   if (!tenant || !form) return false
   return formSnapshot(form) !== formSnapshot(formFromTenant(tenant))
-}
-
-function readIssued(tenantID) {
-  if (!tenantID) return []
-  try {
-    const all = JSON.parse(sessionStorage.getItem(ISSUED_KEY) || '{}')
-    return all[tenantID] || []
-  } catch {
-    return []
-  }
-}
-
-function rememberIssued(tenantID, created) {
-  if (!tenantID || !created?.id) return
-  try {
-    const all = JSON.parse(sessionStorage.getItem(ISSUED_KEY) || '{}')
-    const rows = all[tenantID] || []
-    all[tenantID] = [{ id: created.id }, ...rows.filter((row) => row.id !== created.id)]
-    sessionStorage.setItem(ISSUED_KEY, JSON.stringify(all))
-  } catch {
-    sessionStorage.removeItem(ISSUED_KEY)
-  }
-}
-
-function forgetIssued(tenantID, id) {
-  try {
-    const all = JSON.parse(sessionStorage.getItem(ISSUED_KEY) || '{}')
-    all[tenantID] = (all[tenantID] || []).filter((row) => row.id !== id)
-    sessionStorage.setItem(ISSUED_KEY, JSON.stringify(all))
-  } catch {
-    sessionStorage.removeItem(ISSUED_KEY)
-  }
 }
