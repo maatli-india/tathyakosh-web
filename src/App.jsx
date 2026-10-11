@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Dock from './landing/Dock'
 import Admin from './admin/Admin'
 import Landing from './landing/Landing'
 import { go, parseLocation, usePath } from './path'
@@ -46,6 +47,8 @@ export default function App() {
       ) : (
         <Landing onSignIn={signIn} />
       )}
+      <Dock />
+      <p className="copyright">© {new Date().getFullYear()} Maatli</p>
     </PreferencesProvider>
   )
 }

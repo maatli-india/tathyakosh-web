@@ -69,12 +69,25 @@ export default function TenantFields({ form, mode, onChange }) {
           <div key={index} className="type-block">
             <label>
               Name
-              <input
-                placeholder="profile_pic"
-                readOnly={type.locked}
-                value={type.name}
-                onChange={(event) => updateType(index, { name: event.target.value })}
-              />
+              {type.locked ? (
+                <span className="name-lock">
+                  <span>{type.name.toUpperCase()}</span>
+                  <button
+                    type="button"
+                    className="copy-icon"
+                    aria-label={`Copy ${type.name}`}
+                    onClick={() => navigator.clipboard.writeText(type.name)}
+                  >
+                    <CopyIcon />
+                  </button>
+                </span>
+              ) : (
+                <input
+                  placeholder="profile_pic"
+                  value={type.name}
+                  onChange={(event) => updateType(index, { name: event.target.value })}
+                />
+              )}
             </label>
             <label>
               Upload expiry
@@ -182,3 +195,12 @@ function MimeField({ onChange, value }) {
 }
 
 let openMenu = null
+
+function CopyIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <rect x="5" y="5" width="8" height="8" rx="1.2" />
+      <path d="M3 10.5 V3.2 H10.5" />
+    </svg>
+  )
+}
