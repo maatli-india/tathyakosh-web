@@ -12,6 +12,8 @@ const MIME_TYPES = [
   'application/json',
   'application/zip',
   'video/mp4',
+  'video/quicktime',
+  'video/webm',
 ]
 
 export default function TenantFields({ form, mode, onChange }) {
