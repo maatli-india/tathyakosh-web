@@ -1,0 +1,4 @@
+# Build context = the runner's `npm run build` output only (keeps node_modules, .git, src out).
+*
+!dist
+!nginx.conf

@@ -1,6 +1,4 @@
-// Browser calls same-origin /kosh. Vite (local) and Netlify (kosh-dev) forward that to the dev API.
-const API_ORIGIN = 'https://api-dev.kosh.maatli.com'
-
+// Browser calls same-origin /kosh; Vite (local) and nginx (deployed) forward it to NEXT_PUBLIC_API_BASE_URL.
 export async function kosh(path, { adminKey, body, method = 'GET' } = {}) {
   const url = `/kosh${path}`
   const headers = { 'X-Admin-Key': adminKey }
@@ -13,7 +11,7 @@ export async function kosh(path, { adminKey, body, method = 'GET' } = {}) {
       method,
     })
   } catch {
-    const error = new Error(`Could not reach ${API_ORIGIN}.`)
+    const error = new Error('Could not reach the Kosh API.')
     error.status = 0
     throw error
   }
